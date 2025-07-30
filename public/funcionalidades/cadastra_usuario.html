@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastrar Usuários</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+      * {
+        box-sizing: border-box;
+        font-family: 'Lexend', sans-serif;
+      }
+      
+      body {
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        background: #5cb85c;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #4cae4c;
+      }
+
+      .navegacao_paginas {
+        margin-top: 20px;
+      }
+
+      .navegacao_paginas a {
+        color: #337ab7;
+        text-decoration: none;
+      }
+
+      .navegacao_paginas a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cadastrar Usuários</h1>
+    <form id="formulario">
+      <input type="text" id="nome" placeholder="Nome" required />
+      <input type="number" id="idade" placeholder="Idade" required min="0" />
+      <input type="text" id="endereco" placeholder="Endereço" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <button type="submit">Cadastrar</button>
+    </form>
+    <div id="mensagem"></div>
+    <div id="novoUsuario"></div>
+    <div class="navegacao_paginas">
+      <a href="../index.html">Retornar ao Home</a>
+    </div>
+
+    <script>
+      const formulario = document.getElementById("formulario");
+      formulario.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const nome = document.getElementById("nome").value.trim();
+        const idade = Number(document.getElementById("idade").value);
+        const endereco = document.getElementById("endereco").value.trim();
+        const email = document.getElementById("email").value.trim();
+
+        fetch("/cadastrar-usuario", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ nome, idade, endereco, email }),
+        })
+          .then((resposta) => resposta.json())
+          .then((data) => {
+            const mensagem = document.getElementById("mensagem");
+            const novoUsuario = document.getElementById("novoUsuario");
+
+            if (data.ok) {
+              mensagem.textContent = data.message;
+              novoUsuario.innerHTML = `
+                <p><strong>Nome:</strong> ${data.usuario.nome}</p>
+                <p><strong>Idade:</strong> ${data.usuario.idade}</p>
+                <p><strong>Endereço:</strong> ${data.usuario.endereco}</p>
+                <p><strong>Email:</strong> ${data.usuario.email}</p>
+              `;
+              formulario.reset();
+            } else {
+              mensagem.textContent = data.error || "Erro ao cadastrar usuário.";
+              novoUsuario.innerHTML = "";
+            }
+          })
+          .catch((error) => {
+            const mensagem = document.getElementById("mensagem");
+            mensagem.textContent = "Erro ao comunicar com o servidor.";
+            console.error("Erro:", error);
+          });
+      });
+    </script>
+  </body>
+</html>
