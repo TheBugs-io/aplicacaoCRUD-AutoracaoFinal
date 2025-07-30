@@ -1,4 +1,4 @@
-# 📚 Aplicação de Geração e Manipulação de Usuários Fictícios
+# Aplicação de Geração e Manipulação de Usuários Fictícios
 
 Este projeto foi desenvolvido como parte da disciplina **Autoração Multimídia II** do curso de **Bacharelado em Sistemas e Mídias Digitais** da **Universidade Federal do Ceará (UFC)**.
 
@@ -6,6 +6,23 @@ Este projeto foi desenvolvido como parte da disciplina **Autoração Multimídia
 
 **Prof. Wellington W. F. Sarmento**  
 Instituto Universidade Virtual (UFC Virtual)
+Universidade Federal do Ceará (UFC)
+
+### Equipe
+
+**Ingryd Cordeiro Duarte**
+Universidade Federal do Ceará (UFC)
+
+**Renan Araujo Polainas**
+Universidade Federal do Ceará (UFC)
+
+**Tiago Viana Monteiro**
+Universidade Federal do Ceará (UFC)
+
+**David Boanerges**
+Universidade Federal do Ceará (UFC)
+
+**Arthur Heráclio**
 Universidade Federal do Ceará (UFC)
 
 ---
@@ -48,10 +65,10 @@ Você pode acessar um tutorial completo sobre estra aplicação de exemplo atrav
 | RF0002 | Listar os usuários em uma interface web com paginação                    | ☑️           |
 | RF0003 | Ordenar os usuários por nome ou idade, de forma crescente ou decrescente | ☑️           |
 | RF0004 | Inserir um novo usuário na base de dados (arquivo JSON)                  | ☑️           |
-| RF0005 | Atualizar os dados de um usuário (pelo ID)                               | ⬜           |
-| RF0006 | Remover um usuário do sistema (pelo ID\_                                 | ⬜           |
-| RNF001 | Salvar e manter persistência dos usuários em arquivo JSON                | ⬜           |
-| RNF002 | Paginar os usuários usando API (/list-users/:count?)                     | ⬜           |
+| RF0005 | Atualizar os dados de um usuário (pelo ID)                               | ☑️           |
+| RF0006 | Remover um usuário do sistema (pelo ID\_                                 | ☑️           |
+| RNF001 | Salvar e manter persistência dos usuários em arquivo JSON                | ☑️          |
+| RNF002 | Paginar os usuários usando API (/list-users/:count?)                     | ☑️           |
 
 ---
 
@@ -67,19 +84,8 @@ Você pode acessar um tutorial completo sobre estra aplicação de exemplo atrav
 
 ---
 
-## 🛠️ Como Baixar e Executar a Aplicação
+## Execução da aplicação
 
-### ⚠️ IMPORTANTE: Criando um arquivo com _1.000.000 de usuários \_fake_
-
-Para que você possa usar corretamente este projeto é preciso criar o arquivo `usuarios.json`. Este arquivo é gerado através do programa `gerar_usuarios_fake.js`. Usando o seu terminal, vá na pasta do projeto e execute o seguinte comando:
-
-```javascript
-node gerar_usuarios_fake.js
-```
-
-O funcionamento da funcionalidade de geração dos usuários _fake_ se eoncontra no arquivo `criando-json-usuarios.md`, que pode ser acessado através deste link: [acesso à explicação]("./criando-json-usuarios.md").
-
----
 
 ### 1. Clone o repositório
 
@@ -88,15 +94,17 @@ git clone https://github.com/seuusuario/usuarios-app.git
 cd usuarios-app
 ```
 
-### 2. Instale as dependências
+### 2. Rode o comando para instalar as dependências e gerar o usuarios.json
 
 ```bash
-npm install
+npm build
 ```
 
-### 3. Execute a API de geração de usuários
+### 3. Execute o projeto utilizando o modo de desenvolvimento (nodemon) ou produção
 
 ```bash
+npm run dev 
+# ou
 npm start
 ```
 
