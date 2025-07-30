@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./atualizar.css" />
+    <title>Editar Usuário</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+      * {
+        box-sizing: border-box;
+        font-family: 'Lexend', sans-serif;
+      }
+
+      body {
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 1rem;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      .group-pesquisa{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+        gap: 0.5rem;
+      }
+
+      form {
+        background: #fff;
+        padding: 1.2rem;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        background: #5cb85c;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #4cae4c;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Editar usuário</h1>
+    <div class="group-pesquisa">
+      <label for="uuid">ID de Usuário:</label>
+      <input type="text" placeholder="UUID" name="uuid" id="uuid" />
+      <button id="buscar">Pesquisar</button>
+      <a href="../index.html" class="navegacao_paginas">Voltar para Lista</a>
+    </div>
+
+    <form id="formulario"></form>
+
+    <script>
+      document.getElementById("buscar").addEventListener("click", async () => {
+        const id = document.getElementById("uuid").value.trim();
+
+        try {
+          const response = await fetch(`/buscar-usuario/${id}`);
+          if (!response.ok) {
+            alert("Usuário não encontrado.");
+            return;
+          }
+
+          const usuario = await response.json();
+
+          document.getElementById("formulario").innerHTML = `
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nome" value="${usuario.nome}" />
+            <label for="idade">Idade:</label>
+            <input type="number" name="idade" id="idade" value="${usuario.idade}" />
+            <label for="endereco">Endereço:</label>
+            <input type="text" name="endereco" id="endereco" value="${usuario.endereco}" />
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="${usuario.email}" />
+            <button type="submit">Salvar</button>
+          `;
+
+          document.getElementById("formulario").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const dadosAtualizados = {
+              nome: document.getElementById("nome").value,
+              idade: parseInt(document.getElementById("idade").value),
+              endereco: document.getElementById("endereco").value,
+              email: document.getElementById("email").value,
+            };
+
+            const resposta = await fetch(`/atualizar-usuario/${id}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(dadosAtualizados),
+            });
+
+            if (resposta.ok) {
+              alert("Usuário atualizado com sucesso!");
+            } else {
+              alert("Erro ao atualizar usuário.");
+            }
+          });
+
+        } catch (err) {
+          alert("Erro na requisição.");
+          console.error(err);
+        }
+      });
+    </script>
+  </body>
+</html>
