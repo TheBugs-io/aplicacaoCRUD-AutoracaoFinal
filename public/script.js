@@ -112,6 +112,7 @@ function renderizarTabela(data) {
   data.forEach((u) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
+      <td>${u.id}</td>
       <td>${u.nome}</td>
       <td>${u.idade}</td>
       <td>${u.endereco}</td>
@@ -163,31 +164,6 @@ async function editarUsuario(id) {
     } else {
       alert(
         "Erro ao atualizar usuário: " + (resultado.error || "Erro desconhecido")
-      );
-    }
-  } catch (erro) {
-    console.error("Erro:", erro);
-    alert("Erro ao conectar com o servidor");
-  }
-}
-
-async function removerUsuario(id) {
-  if (!confirm("Tem certeza que deseja remover este usuário?")) {
-    return;
-  }
-
-  try {
-    const resposta = await fetch(`/remover-usuario/${id}`, {
-      method: "DELETE",
-    });
-
-    const resultado = await resposta.json();
-    if (resultado.ok) {
-      alert("Usuário removido com sucesso!");
-      carregarUsuarios(0);
-    } else {
-      alert(
-        "Erro ao remover usuário: " + (resultado.error || "Erro desconhecido")
       );
     }
   } catch (erro) {
