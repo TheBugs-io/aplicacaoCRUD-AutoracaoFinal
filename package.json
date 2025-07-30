@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Aplicação para fins didáticos explicando como fazer um crud de usuários usando o node.js, express e JSON.",
   "main": "server.js",
+  "type":"module",
   "scripts": {
-    "start": "node --env-file=.env server.js ",
+    "start": "nodemon --env-file=.env server.js ",
     "dev": "nodemon --env-file=.env server.js",
-    "generate:users": "node --env-file=.env gerar_usuarios_fake.js"
+    "generate:users": "node --env-file=.env gerar_usuarios_fake.js 100",
+    "build": "npm i && node gerar_usuarios_fake.js 100"
   },
   "keywords": [
     "usuarios",
@@ -15,7 +17,7 @@
     "express",
     "crud"
   ],
-  "author": "Wellington Sarmento",
+  "author": "Wellington Sarmento, Ingryd Duarte, Renan Araujo Polainas, David Boanerges, Tiago Viana, Arthur Heraclio",
   "license": "LGPL-3.0-or-later",
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
