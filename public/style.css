@@ -1,10 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
 }
 th,
 td {
-  padding: 8px;
+  padding: 0.6rem;
   border: 1px solid #ccc;
 }
 th {
@@ -20,14 +27,14 @@ th {
   padding: 5px 10px;
 }
 
-/* Adicione estas regras ao seu style.css */
 .btn-editar,
 .btn-remover {
-  padding: 5px 10px;
+  padding: 0.6rem 1rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1rem;
+  text-decoration: none;
 }
 
 .btn-editar {
@@ -49,7 +56,7 @@ th {
 }
 
 .filtro {
-  margin: 20px 0;
+  margin: 1.2rem 0;
 }
 
 .filtro input {
