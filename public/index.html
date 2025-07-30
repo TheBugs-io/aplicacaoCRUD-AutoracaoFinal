@@ -6,16 +6,16 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>👥 Lista de Usuários com Paginação</h1>
-    <!-- Adicione estes links no menu do index.html -->
+    <h1>Lista de Usuários com Paginação</h1>
     <menu>
-      <a href="cadastra_usuario.html">Cadastrar Usuário</a>
-      <a href="alterar_dados_usuarios.html">Alterar Usuários</a>
-      <a href="remover_usuario.html">Remover Usuários</a>
+      <a href="/funcionalidades/cadastra_usuario.html" rel="noopener noreferrer" class="btn-editar">Cadastrar Usuário</a>
+      <a href="/funcionalidades/alterar_dados_usuarios.html" rel="noopener noreferrer" class="btn-editar">Atualizar Usuário</a>
+      <a href="/funcionalidades/deletar_usuario.html" rel="noopener noreferrer" class="btn-remover">Deletar Usuário</a>
     </menu>
     <table id="tabelaUsuarios">
       <thead>
         <tr>
+          <th>UUID</th>
           <th onclick="ordenarTabela('nome')">Nome ⬍</th>
           <th onclick="ordenarTabela('idade')">Idade ⬍</th>
           <th>Endereço</th>
