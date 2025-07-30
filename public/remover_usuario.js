@@ -1,20 +1,55 @@
-// Define a função que adiciona o botão de ação específico para esta página
+const tabelaBody = document.querySelector("#tabelaUsuarios tbody");
+const mensagem = document.createElement("div");
+const tabela = document.querySelector("#tabelaUsuarios");
+document.body.insertBefore(mensagem, tabela);
+
 window.adicionarBotaoAcao = function (usuario) {
-  return `<td><button class="btn-remover" onclick="removerUsuario('${usuario.id}')">Remover</button></td>`;
+  return `<td><button onclick="removerUsuario('${usuario.id}')" class="btn-remover">Deletar</button></td>`;
 };
 
-// Sobrescreve a função renderizarTabela para incluir a coluna de ações
-const originalRenderizarTabela = window.renderizarTabela;
-window.renderizarTabela = function (data) {
-  // Adiciona a coluna de ações no cabeçalho se não existir
-  const thead = document.querySelector("#tabelaUsuarios thead tr");
-  if (thead.children.length === 4) {
-    thead.innerHTML += "<th>Ação</th>";
+async function carregarUsuarios() {
+  try {
+    const resposta = await fetch("/list-users/100");
+    const usuarios = await resposta.json();
+
+    tabelaBody.innerHTML = "";
+
+    usuarios.forEach((usuario) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${usuario.id}</td>
+        <td>${usuario.nome}</td>
+        <td>${usuario.idade}</td>
+        <td>${usuario.endereco}</td>
+        <td>${usuario.email}</td>
+        ${window.adicionarBotaoAcao(usuario)}
+      `;
+      tabelaBody.appendChild(tr);
+    });
+  } catch (err) {
+    mensagem.textContent = "Erro ao carregar usuários.";
+    console.error(err);
   }
-  originalRenderizarTabela(data);
-};
+}
 
-// Carrega os usuários para aplicar as mudanças
-window.onload = function () {
-  carregarUsuarios(0);
-};
+async function removerUsuario(id) {
+  if (!confirm("Deseja realmente deletar este usuário?")) return;
+
+  try {
+    const response = await fetch(`/deletar-usuario/${id}`, {
+      method: "DELETE",
+    });
+    const data = await response.json();
+    if (data.ok) {
+      mensagem.textContent = data.message;
+      carregarUsuarios();
+    } else {
+      mensagem.textContent = data.error || "Erro ao deletar usuário.";
+    }
+  } catch (err) {
+    mensagem.textContent = "Erro na comunicação com o servidor.";
+    console.error(err);
+  }
+}
+
+carregarUsuarios();
