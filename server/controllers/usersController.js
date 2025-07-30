@@ -1,5 +1,5 @@
 import { v4 as uuidv4, validate as uuidValidate } from "uuid";
-import * as userControlFunctions from "../scripts/user-control.js";
+import * as userControlFunctions from "../../scripts/user-control.js";
 
 // Sanitiza strings para evitar caracteres especiais
 const escapeHtml = (text) => {

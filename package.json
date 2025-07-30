@@ -5,8 +5,8 @@
   "main": "server.js",
   "type":"module",
   "scripts": {
-    "start": "nodemon --env-file=.env server.js ",
-    "dev": "nodemon --env-file=.env server.js",
+    "start": "nodemon --env-file=.env server/server.js ",
+    "dev": "nodemon --env-file=.env server/server.js",
     "generate:users": "node --env-file=.env gerar_usuarios_fake.js 100",
     "build": "npm i && node gerar_usuarios_fake.js 100"
   },
