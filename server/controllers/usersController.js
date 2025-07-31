@@ -1,35 +1,29 @@
 import { v4 as uuidv4, validate as uuidValidate } from "uuid";
 import * as userControlFunctions from "../../scripts/user-control.js";
-
-// Sanitiza strings para evitar caracteres especiais
-const escapeHtml = (text) => {
-  if (typeof text !== "string") return text;
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-};
+import { sanitizeInput } from "../../scripts/normalizeString.js";
 
 // Valida dados de usuário para cadastro/atualização
 const validarUsuario = (data, atualizar = false) => {
   const { nome, idade, endereco, email } = data;
 
   if (!atualizar || nome !== undefined) {
-    if (typeof nome !== "string" || nome.trim().length === 0) return "Nome inválido";
+    if (typeof nome !== "string" || nome.trim().length === 0)
+      return "Nome inválido";
   }
 
   if (!atualizar || idade !== undefined) {
-    if (typeof idade !== "number" || !Number.isInteger(idade) || idade < 0) return "Idade inválida";
+    if (typeof idade !== "number" || !Number.isInteger(idade) || idade < 0)
+      return "Idade inválida";
   }
 
   if (!atualizar || endereco !== undefined) {
-    if (typeof endereco !== "string" || endereco.trim().length === 0) return "Endereço inválido";
+    if (typeof endereco !== "string" || endereco.trim().length === 0)
+      return "Endereço inválido";
   }
 
   if (!atualizar || email !== undefined) {
-    if (typeof email !== "string" || !/^\S+@\S+\.\S+$/.test(email.trim())) return "Email inválido";
+    if (typeof email !== "string" || !/^\S+@\S+\.\S+$/.test(email.trim()))
+      return "Email inválido";
   }
 
   return null;
@@ -38,14 +32,13 @@ const validarUsuario = (data, atualizar = false) => {
 // Sanitiza campos de usuário
 const sanitizeUsuario = (usuario) => ({
   ...usuario,
-  nome: escapeHtml(usuario.nome),
-  endereco: escapeHtml(usuario.endereco),
-  email: escapeHtml(usuario.email),
+  nome: sanitizeInput(usuario.nome),
+  endereco: sanitizeInput(usuario.endereco),
+  email: sanitizeInput(usuario.email),
 });
 
 //Valida e sanitiza UUID de parâmetro
-const validarUUID = (id) => id && uuidValidate(id.trim()) ? id.trim() : null;
-
+const validarUUID = (id) => (id && uuidValidate(id.trim()) ? id.trim() : null);
 
 export const listUsers = async (req, res) => {
   let num = parseInt(req.params.count, 10);
@@ -69,13 +62,18 @@ export const deleteUser = async (req, res) => {
 
   try {
     let usuarios = await userControlFunctions.lerUsuarios(0);
-    const index = usuarios.findIndex(u => u.id === id);
-    if (index === -1) return res.status(404).json({ error: "Usuário não encontrado." });
+    const index = usuarios.findIndex((u) => u.id === id);
+    if (index === -1)
+      return res.status(404).json({ error: "Usuário não encontrado." });
 
     const [removido] = usuarios.splice(index, 1);
     await userControlFunctions.salvarUsuarios(usuarios);
 
-    res.json({ ok: true, message: "Usuário removido com sucesso!", usuario: sanitizeUsuario(removido) });
+    res.json({
+      ok: true,
+      message: "Usuário removido com sucesso!",
+      usuario: sanitizeUsuario(removido),
+    });
   } catch (err) {
     console.error("Erro ao remover usuário:", err);
     res.status(500).json({ error: "Não foi possível remover usuário." });
@@ -89,14 +87,20 @@ export const cadastrarUsuario = async (req, res) => {
   try {
     const novoUsuario = {
       id: uuidv4(),
-      nome: req.body.nome.trim(),
+      nome: sanitizeInput(req.body.nome.trim()),
       idade: req.body.idade,
-      endereco: req.body.endereco.trim(),
-      email: req.body.email.trim(),
+      endereco: sanitizeInput(req.body.endereco.trim()),
+      email: sanitizeInput(req.body.email.trim()),
     };
 
     await userControlFunctions.appendUsuario(novoUsuario);
-    res.status(201).json({ ok: true, message: "Usuário cadastrado com sucesso!", usuario: sanitizeUsuario(novoUsuario) });
+    res
+      .status(201)
+      .json({
+        ok: true,
+        message: "Usuário cadastrado com sucesso!",
+        usuario: sanitizeUsuario(novoUsuario),
+      });
   } catch (err) {
     console.error("Erro ao cadastrar usuário:", err);
     res.status(500).json({ error: "Não foi possível cadastrar usuário." });
@@ -112,17 +116,23 @@ export const atualizarUsuario = async (req, res) => {
 
   try {
     const usuarios = await userControlFunctions.lerUsuarios(0);
-    const index = usuarios.findIndex(u => u.id === id);
-    if (index === -1) return res.status(404).json({ error: "Usuário não encontrado." });
+    const index = usuarios.findIndex((u) => u.id === id);
+    if (index === -1)
+      return res.status(404).json({ error: "Usuário não encontrado." });
 
     const usuario = usuarios[index];
-    if (req.body.nome) usuario.nome = req.body.nome.trim();
+    if (req.body.nome) usuario.nome = sanitizeInput(req.body.nome.trim());
     if (req.body.idade !== undefined) usuario.idade = req.body.idade;
-    if (req.body.endereco) usuario.endereco = req.body.endereco.trim();
-    if (req.body.email) usuario.email = req.body.email.trim();
+    if (req.body.endereco)
+      usuario.endereco = sanitizeInput(req.body.endereco.trim());
+    if (req.body.email) usuario.email = sanitizeInput(req.body.email.trim());
 
     await userControlFunctions.salvarUsuarios(usuarios);
-    res.json({ ok: true, message: "Usuário atualizado com sucesso!", usuario: sanitizeUsuario(usuario) });
+    res.json({
+      ok: true,
+      message: "Usuário atualizado com sucesso!",
+      usuario: sanitizeUsuario(usuario),
+    });
   } catch (err) {
     console.error("Erro ao atualizar usuário:", err);
     res.status(500).json({ error: "Não foi possível atualizar usuário." });
@@ -135,8 +145,9 @@ export const getUserById = async (req, res) => {
 
   try {
     const usuarios = await userControlFunctions.lerUsuarios(0);
-    const usuario = usuarios.find(u => u.id === id);
-    if (!usuario) return res.status(404).json({ error: "Usuário não encontrado." });
+    const usuario = usuarios.find((u) => u.id === id);
+    if (!usuario)
+      return res.status(404).json({ error: "Usuário não encontrado." });
 
     res.json(sanitizeUsuario(usuario));
   } catch (err) {
