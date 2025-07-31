@@ -4,80 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastrar Usuários</title>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-
-      * {
-        box-sizing: border-box;
-        font-family: 'Lexend', sans-serif;
-      }
-      
-      body {
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 20px;
-      }
-
-      h1 {
-        color: #333;
-      }
-
-      form {
-        background: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-
-      input {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-
-      button {
-        background: #5cb85c;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background: #4cae4c;
-      }
-
-      .navegacao_paginas {
-        margin-top: 20px;
-      }
-
-      .navegacao_paginas a {
-        color: #337ab7;
-        text-decoration: none;
-      }
-
-      .navegacao_paginas a:hover {
-        text-decoration: underline;
-      }
-    </style>
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <h1>Cadastrar Usuários</h1>
-    <form id="formulario">
-      <input type="text" id="nome" placeholder="Nome" required />
-      <input type="number" id="idade" placeholder="Idade" required min="0" />
-      <input type="text" id="endereco" placeholder="Endereço" required />
-      <input type="email" id="email" placeholder="Email" required />
-      <button type="submit">Cadastrar</button>
-    </form>
-    <div id="mensagem"></div>
-    <div id="novoUsuario"></div>
-    <div class="navegacao_paginas">
-      <a href="../index.html">Retornar ao Home</a>
-    </div>
+    <main class="main-cadastro">
+      <h1>Cadastrar Usuários</h1>
+      <form id="formulario">
+        <input type="text" id="nome" placeholder="Nome" required />
+        <input type="number" id="idade" placeholder="Idade" required min="0" />
+        <input type="text" id="endereco" placeholder="Endereço" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <button type="submit" class="btn-submit">Cadastrar</button>
+      </form>
+      <div id="mensagem"></div>
+      <div id="novoUsuario"></div>
+      <div class="navegacao_paginas">
+        <a href="../index.html">Retornar ao Home</a>
+      </div>
+    </main>
 
     <script>
       const formulario = document.getElementById("formulario");

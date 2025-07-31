@@ -6,31 +6,58 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Lista de Usuários com Paginação</h1>
-    <menu>
-      <a href="/funcionalidades/cadastra_usuario.html" rel="noopener noreferrer" class="btn-editar">Cadastrar Usuário</a>
-      <a href="/funcionalidades/alterar_dados_usuarios.html" rel="noopener noreferrer" class="btn-editar">Atualizar Usuário</a>
-      <a href="/funcionalidades/deletar_usuario.html" rel="noopener noreferrer" class="btn-remover">Deletar Usuário</a>
-    </menu>
-    <table id="tabelaUsuarios">
-      <thead>
-        <tr>
-          <th>UUID</th>
-          <th onclick="ordenarTabela('nome')">Nome ⬍</th>
-          <th onclick="ordenarTabela('idade')">Idade ⬍</th>
-          <th>Endereço</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <header>
+      <img src="/assets/smd.png" alt="Fotografia do SMD" class="banner" />
+      <img src="/assets/logomarca.svg" alt="Logomarca" class="logo" />
+    </header>
+    <main>
+      <div class="group-users">
+        <h1>Usuários interessados</h1>
+        <menu>
+          <a
+            href="/funcionalidades/cadastra_usuario.html"
+            rel="noopener noreferrer"
+            class="btn-editar"
+            >Cadastrar Usuário</a
+          >
+          <a
+            href="/funcionalidades/alterar_dados_usuarios.html"
+            rel="noopener noreferrer"
+            class="btn-editar"
+            >Atualizar Usuário</a
+          >
+          <a
+            href="/funcionalidades/deletar_usuario.html"
+            rel="noopener noreferrer"
+            class="btn-remover"
+            >Deletar Usuário</a
+          >
+        </menu>
+      </div>
+      <table id="tabelaUsuarios">
+        <thead>
+          <tr>
+            <th>UUID</th>
+            <th onclick="ordenarTabela('nome')">Nome ⬍</th>
+            <th onclick="ordenarTabela('idade')">Idade ⬍</th>
+            <th>Endereço</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
 
-    <div class="paginacao">
-      <button onclick="paginaAnterior()">⬅ Anterior</button>
-      Página <span id="paginaAtual">1</span> de <span id="totalPaginas">1</span>
-      <button onclick="proximaPagina()">Próxima ➡</button>
-    </div>
-
+      <div class="paginacao">
+        <button onclick="paginaAnterior()">⬅ Anterior</button>
+        Página <span id="paginaAtual">1</span> de
+        <span id="totalPaginas">1</span>
+        <button onclick="proximaPagina()">Próxima ➡</button>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2025 - Todos os direitos reservados</p>
+      <p>Versão 1.0.0</p>
+    </footer>
     <script src="/client/script.js"></script>
   </body>
 </html>

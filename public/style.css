@@ -1,23 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
 * {
   box-sizing: border-box;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
+}
+
+:root {
+  --primary-color: #fe572a;
+  --secondary-color: #685bc7;
+  --text-color: #201e1f;
+  --bg-color: #f3f0eb;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #0e2542;
+    color: #e0e0e0;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding: 1rem;
+}
+
+header {
+  width: 100%;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+header .banner {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner .logo {
+  height: 10rem;
+  max-width: 100%;
+}
+
+.logo {
+  position: absolute;
+  top: 1rem;
+  left: 45%;
+  right: 50%;
+  width: 15rem;
+  height: auto;
+  display: block;
+  margin: 1.2rem auto;
+}
+
+.group-users {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
 }
+
+th {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.8rem;
+  text-align: left;
+}
+
 th,
 td {
   padding: 0.6rem;
   border: 1px solid #ccc;
 }
+
 th {
-  background: #f0f0f0;
   cursor: pointer;
 }
+
 .paginacao {
   margin-top: 10px;
   text-align: center;
@@ -68,4 +149,43 @@ th {
 .filtro button {
   padding: 8px 15px;
   margin-right: 10px;
+}
+
+footer {
+  background-color: var(--secondary-color);
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+/* Telas com input */
+
+input {
+  width: 100%;
+  padding: 0.6rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-submit{
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.main-cadastro {
+  max-width: 80%;
+  margin: 1rem auto;
+  padding: 2rem;
+  background-color: #f1f2fc;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color:#201e1f;
 }
