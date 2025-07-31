@@ -11,18 +11,23 @@ Universidade Federal do Ceará (UFC)
 ### Equipe
 
 **Ingryd Cordeiro Duarte**
+Bacharelado em andamento em Sistemas e Mídias Digitais
 Universidade Federal do Ceará (UFC)
 
 **Renan Araujo Polainas**
+Bacharelado em andamento em Sistemas e Mídias Digitais
 Universidade Federal do Ceará (UFC)
 
 **Tiago Viana Monteiro**
+Bacharelado em andamento em Sistemas e Mídias Digitais
 Universidade Federal do Ceará (UFC)
 
 **David Boanerges**
+Bacharelado em andamento em Sistemas e Mídias Digitais
 Universidade Federal do Ceará (UFC)
 
 **Arthur Heráclio**
+Bacharelado em andamento em Sistemas e Mídias Digitais
 Universidade Federal do Ceará (UFC)
 
 ---
