@@ -1,6 +1,6 @@
-const fs = require("fs");
-const { faker } = require("@faker-js/faker");
-const { v4: uuidv4 } = require("uuid");
+import { writeFileSync, appendFileSync } from "fs";
+import { faker } from "@faker-js/faker";
+import { v4 as uuidv4 } from "uuid";
 
 const LOTE = 100;
 const ARQUIVO = "usuarios.json";
@@ -27,7 +27,7 @@ async function gerarEGravarUsuarios() {
     `Iniciando geração de ${TOTAL_USUARIOS} usuários em lotes de ${LOTE}...`
   );
 
-  fs.writeFileSync(ARQUIVO, "[\n");
+  writeFileSync(ARQUIVO, "[\n");
 
   let primeiro = true;
   for (let i = 0; i < TOTAL_USUARIOS; i += LOTE) {
@@ -36,12 +36,12 @@ async function gerarEGravarUsuarios() {
       usuarios.push(gerarUsuario());
     }
     const jsonLote = JSON.stringify(usuarios, null, 2).slice(1, -1);
-    if (!primeiro) fs.appendFileSync(ARQUIVO, ",\n");
-    fs.appendFileSync(ARQUIVO, jsonLote);
+    if (!primeiro) appendFileSync(ARQUIVO, ",\n");
+    appendFileSync(ARQUIVO, jsonLote);
     primeiro = false;
   }
 
-  fs.appendFileSync(ARQUIVO, "\n]");
+  appendFileSync(ARQUIVO, "\n]");
   console.log(`✅ Arquivo "${ARQUIVO}" gerado com sucesso!`);
 }
 
