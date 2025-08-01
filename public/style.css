@@ -70,6 +70,36 @@ header .banner {
   margin: 1.2rem auto;
 }
 
+.logo:hover{
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.runner-skatista {
+  width: 5rem;
+  height: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: carrouselSkate 8s linear infinite;
+}
+
+.carrousel {
+  position: relative;
+  width: 100%;
+  height: 5rem;
+  overflow: hidden;
+}
+
+@keyframes carrouselSkate {
+  0% {
+    left: -5rem;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
 .group-users {
   display: flex;
   flex-direction: row;
